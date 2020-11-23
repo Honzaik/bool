@@ -23,8 +23,23 @@
 \vspace{1\baselineskip}
 
 \section{}
-a
+We know that a boolean function $g: \mathbb{F}_{2^m} \rightarrow \mathbb{F}_2$ is balanced iff $\hat{g}(0) = 0$. Let $g(x) \coloneqq f(x)+f(x+u)$ for some $u \in \mathbb{F}_{2^{2n}}, u \neq 0$. We want to show, that $g(x)$ is balanced:
+\begin{gather*}
+\hat{g}(0) = \sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{g(x)+\langle x,0 \rangle} = \sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{g(x)} = \sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{f(x)+f(x+u)}
+\end{gather*}
+Let's see what $f(x)$ and $f(x+u)$ is:
+\begin{gather*}
+f(x) = x_1 x_2 + x_3 x_4 + \dots x_{2n-1} x_{2n}\\
+f(x+u) = (x_1+u_1) (x_2+u_2) + (x_3+u_3) (x_4+u_4) + \dots (x_{2n-1}+u_{2n-1}) (x_{2n}+u_{2n}) =\\
+x_1 x_2 + x_1 u_2 + x_2 u_1 + u_1 u_2 + \text{same for others}
+\end{gather*}
+Therefore we can rewrite $f(x+u)$ as $f(x+u)=f(x)+f(u)+\langle x,u' \rangle$ where $u' = (u_2,u_1,u_3,u_4,\dots) \in \mathbb{F}_{2^{2n}}$ and since $u \neq 0$ then $u' \neq 0$. Therefore:
+\begin{gather*}
+\hat{g}(0) = \sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{f(x)+f(x)+f(u)+\langle x,u' \rangle} = \sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{f(u)+\langle x,u' \rangle} = (-1)^{f(u)}\sum\limits_{x \in \mathbb{F}_{2^{2n}}} (-1)^{\langle x,u' \rangle}
+\end{gather*}
+$(-1)^{f(u)}$ is $1$ or $-1$ but the last sum is $0$ by annihilator lemma since $u' \neq 0$. Thefore $f(x)+f(x+u)$ is balanced.
 
+Or we can see as above that $g(x)$ is affine and use the rank nullity theorem which says that $\dim(Ker(g)) = 2^n-1$ and thefore half $x$ map to $0$ and the other half must map to $1$.
 \section{}
 a
 
