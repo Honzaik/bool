@@ -41,7 +41,67 @@ $(-1)^{f(u)}$ is $1$ or $-1$ but the last sum is $0$ by annihilator lemma since 
 
 Or we can see as above that $g(x)$ is affine and use the rank nullity theorem which says that $\dim(Ker(g)) = 2^n-1$ and thefore half $x$ map to $0$ and the other half must map to $1$.
 \section{}
-a
+We are going to be using the same steps as in the proof for $r = 2^{m-1}$ and \\$\text{Supp}_f = \bigcup\limits_{i=1}^{r} V_i \setminus \{0\}$. Now we have $r = 2^{m-1}+1$ and $0 \in \text{Supp}_f$. 
+
+We want to prove that $\forall a \in \mathbb{F}^n_2: \hat{f}(a)= \pm 2^m$. We can rewrite as follows:
+\begin{gather*}
+\hat{f}(a) = \sum\limits_{x \in \mathbb{F}^n_2} \mu(f(x)+\langle a,x \rangle) = \sum\limits_{x \in \mathbb{F}^n_2} \mu(f(x))\mu(\langle a,x \rangle) = -\sum\limits_{x \in \text{Supp}_f} \mu(\langle a,x \rangle) + \sum\limits_{x \notin \text{Supp}_f} \mu(\langle a,x \rangle)
+\end{gather*}
+First let's assume that $\forall i \in \{1,\dots,r\}: a \notin V_i^\perp$. That means that using anihilator lemma we calculate the first sum as follows:
+\begin{gather*}
+-\sum\limits_{x \in \text{Supp}_f} \mu(\langle a,x \rangle) = -(\mu(\langle a,0 \rangle) + \sum\limits_{x \in \text{Supp}_f\setminus \{0\}} \mu(\langle a,x \rangle)) = -(1 + \sum\limits_{i = 1}^{2^{m-1}+1} \sum\limits_{x \in V_i\setminus \{0\}} \mu(\langle a,x \rangle)) = \\
+-(1 + \sum\limits_{i = 1}^{2^{m-1}+1} \left( \sum\limits_{x \in V_i} \mu(\langle a,x \rangle) - \mu(\langle a,0 \rangle) \right)) = -(1 + \sum\limits_{i = 1}^{2^{m-1}+1} \left(0 - 1 \right)) = -(1-(2^{m-1}+1)) = 2^{m-1}
+\end{gather*}
+Now for the second sum we need to calculate $|H_a \cap \overline{\text{Supp}_f}|, |\overline{H_a} \cap \overline{\text{Supp}_f}|$ where \\$H_a = \{x \in \mathbb{F}^n_2: \langle a,x \rangle = 0\}$. Then
+\begin{gather*}
+\sum\limits_{x \notin \text{Supp}_f} \mu(\langle a,x \rangle) =  \sum\limits_{x \in \overline{\text{Supp}_f}} \mu(\langle a,x \rangle) = \sum\limits_{x \in (\overline{\text{Supp}_f} \cap H_a )} \mu(\langle a,x \rangle) + \sum\limits_{x \in (\overline{\text{Supp}_f} \cap \overline{H_a} )} \mu(\langle a,x \rangle) =\\
+\sum\limits_{x \in (\overline{\text{Supp}_f} \cap H_a )} 1 + \sum\limits_{x \in (\overline{\text{Supp}_f} \cap \overline{H_a} )} -1 = |H_a \cap \overline{\text{Supp}_f}| - |\overline{H_a} \cap \overline{\text{Supp}_f}|
+\end{gather*}
+First:
+\begin{gather*}
+|H_a| = 2^{n-1} = 2^{2m-1}\\
+|\text{Supp}_f| = |\left(\bigcup_{i=1}^{2^{m-1}+1} V_i\setminus\{0\}\right) \cup \{0\}| = (2^{m-1}+1)(2^m-1)+1 = 2^{2m-1}+2^{m-1}
+\end{gather*}
+The first holds because $H_a$ because its the kernel of the scalar product which is a linear map with image of dimension $1 \implies$ dimension of the kernel is $n-1$. 
+
+The latter one is because we have $2^{m-1}+1$ vector spaces $V_i$ of dimension $m$ and the only thing which they have in common is one element (0) so we substract from each and then add it at the end.
+
+Now we have to compute $|H_a \cap \text{Supp}_f|$. We can rewrite it as follows:
+\begin{gather*}
+|H_a \cap \text{Supp}_f| = |H_a \cap \left(\left(\bigcup_{i=1}^{2^{m-1}+1} V_i\setminus\{0\}\right) \cup \{0\}\right)| = |H_a \cap \{0\}| + |H_a \cap  (V_1\setminus\{0\})| + \dots \\
+\dots |H_a \cap  (V_r\setminus\{0\})|
+\end{gather*}
+$|H_a \cap (V_i\setminus\{0\})|$ means for how many elements of $x \in (V_i\setminus\{0\})$ holds $\langle a,x \rangle = 0$. Similarly as before it holds for half of elements of $V_i$ (including 0) so its $2^{m-1}-1$ (half and subtracted 0) since $\forall i: a \notin V^\perp_i$. Therefore:
+\begin{gather*}
+|H_a \cap \text{Supp}_f| = (2^{m-1}+1)(2^{m-1}-1)+1 = 2^{2m-2}
+\end{gather*}
+Since $(H_a \cap \text{Supp}_f) \cup (H_a \cap \overline{\text{Supp}_f}) = H_a \cap \mathbb{F}_2^n = H_a$ (and similarly for the other one) we can calculate the rest:
+\begin{gather*}
+|H_a \cap \overline{\text{Supp}_f}| = |H_a|-|H_a \cap \text{Supp}_f| = 2^{2m-1} - 2^{2m-2} = 2^{2m-2}\\
+|\overline{H_a} \cap \overline{\text{Supp}_f}| = |\overline{\text{Supp}_f}|-|H_a \cap \overline{\text{Supp}_f}| = 2^{2m-1}-2^{m-1}-2^{2m-2} = 2^{2m-2}-2^{m-1}\implies\\
+\sum\limits_{x \notin \text{Supp}_f} \mu(\langle a,x \rangle) =  2^{2m-2} - (2^{2m-2}-2^{m-1}) = 2^{m-1} \implies \hat{f}(a) = 2^{m-1} + 2^{m-1} = 2^m
+\end{gather*}
+Now let's assume $a = 0$, then as in the other proof:
+\begin{gather*}
+\hat{f}(0) = 2^{2m}-2|\text{Supp}_f| = 2^{2m} - 2(2^{2m-1}+2^{m-1}) = 2^{2m} - 2^{2m}-2^{m} = -2^{m}
+\end{gather*}
+Now let's assume that there exists $k \in \{1,\dots,r\}: a \in V^\perp_k$. We claim that then $\forall i \in \{1,\dots,r\}\setminus\{k\}: a \notin V^\perp_i$. If that were true, we would have $i\neq j: a \in  V^\perp_i, a \in  V^\perp_j$ which would mean that for every $x \in V_i, y \in V_j \implies \langle a,x \rangle = 0 = \langle a,y \rangle \implies \langle a,x+y \rangle = 0$ but $V_i + V_j = \mathbb{F}_2^n$ which means that $\forall z \in \mathbb{F}_2^n: \langle a,z \rangle = 0$ which is a contradiction for $a \neq 0$.
+
+Now we will proceed as before expect we will handle $V_k$ separately. WLOG $k = 1$. 
+\begin{gather*}
+-\sum\limits_{x \in \text{Supp}_f} \mu(\langle a,x \rangle) = -(\sum\limits_{x \in V_1}\mu(\langle a,x \rangle) + \sum\limits_{i = 2}^{2^{m-1}+1} \left( \sum\limits_{x \in V_i \setminus\{0\}} \mu(\langle a,x \rangle) - \mu(\langle a,0 \rangle) \right)) = \\
+-(|V_1| + \sum\limits_{i = 1}^{2^{m-1}} \left( \sum\limits_{x \in V_{i+1} \setminus\{0\}} \mu(\langle a,x \rangle) - \mu(\langle a,0 \rangle) \right)) = -(2^m - 2^{m-1}) = -2^{m-1}
+\end{gather*}
+And similarly for the other sum. We will again calculate the set cardinalities:
+\begin{gather*}
+|H_a \cap \text{Supp}_f| = |H_a \cap V_1 | + |H_a \cap (\text{Supp}_f \setminus V_k)| = 2^m + 2^{m-1}(2^{m-1}-1) = 2^{2m-2}+2^{m-1}\\
+|H_a \cap \overline{\text{Supp}_f}| = |H_a|-|H_a \cap \text{Supp}_f| = 2^{2m-1} - (2^{2m-2}+2^{m-1}) = 2^{2m-2}-2^{m-1}\\
+|\overline{H_a} \cap \overline{\text{Supp}_f}| = |\overline{\text{Supp}_f}|-|H_a \cap \overline{\text{Supp}_f}| = 2^{2m-1}-2^{m-1}-(2^{2m-2}-2^{m-1}) = 2^{2m-2}\implies\\
+\sum\limits_{x \notin \text{Supp}_f} \mu(\langle a,x \rangle) =  2^{2m-2}-2^{m-1} - 2^{2m-2} = -2^{m-1} \implies\\
+\hat{f}(a) = -2^{m-1} - 2^{m-1} = -2^m
+\end{gather*}
+The proof is now complete.
+
 
 \section{}
 Let's denote $x = \gcd(m,d), y = \gcd(2^m-1, 2^d-1)$. We know that $y | 2^m-1$ and $y | 2^d-1 \implies 2^m \equiv 1 \, (y), 2^n \equiv 1 \, (y) \implies ord_{\mathbb{Z}_y}(2)|m, ord_{\mathbb{Z}_y}(2)|d \implies ord_{\mathbb{Z}_y}(2)|\gcd(m,d)=x$. Therefore $2^x \equiv 1 \, (y) \iff \gcd(2^m-1, 2^d-1) | 2^x-1$.
