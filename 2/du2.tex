@@ -1,0 +1,60 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage{indentfirst} %indentace prvního odstavce
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage[czech]{babel}
+\usepackage{mathdots}
+\usepackage{slashbox}
+
+\begin{document}
+\begin{center}
+\large NMMB331 - HW2
+
+\normalsize Jan Oupický
+\end{center}
+\vspace{1\baselineskip}
+
+\section{}
+Let's assume $L: \mathbb{F}_2^n \rightarrow \mathbb{F}_2^m$. Then
+\begin{gather*}
+\text{Im}(L^*)^\perp = \{y \in \mathbb{F}_2^n | \forall x \in \text{Im}(L^*) : \langle x,y \rangle = 0\} = \{y \in \mathbb{F}_2^n | \forall x \in \mathbb{F}_2^m : \langle L^*(x),y \rangle = 0\}\\
+\text{From lecture we know that $\forall x,y:  \langle L^*(x),y \rangle =  \langle x,L(y) \rangle$} \implies\\
+\text{Im}(L^*)^\perp = \{y \in \mathbb{F}_2^n | \forall x \in \mathbb{F}_2^m : \langle x,L(y) \rangle = 0\}
+\end{gather*}
+We know that for a fixed $v \in \mathbb{F}_2^m$ if $v$ satisfies $\forall x \in \mathbb{F}_2^m: \langle x,v \rangle = 0$ then $v = \underline{0}$. Using this fact we can see that $\text{Im}(L^*)^\perp$ is exactly those $y \in \mathbb{F}_2^n$ such that $L(y) = 0$. That is the definition of $\text{Ker}(L)$.
+
+\section{}
+Let $G,F$ be EA-equivalent vectorial boolean functions i.e.:
+\begin{gather}
+G = A_1 \circ F \circ A_2 + A_3 \text{ where for $i=1,2,3$: } A_i(x) = L_i(x) + b
+\end{gather}
+and $L_i$ is a linear permutation. As in the lecture, choose $u,v$ and we will show that $|\hat{G}(u,v)|$ corresponds to $|\hat{F}(a,b)|$ for exactly one pair $(a,b)$.
+Note that we can write:
+\[G(x) = L_1 \circ F (L_2(x)+b_2) + b_1 + L_3(x)+b_3\]
+Denote $z = L_2(x) + b_2$ then $x = L_2^{-1}(z-b_2) = L_2^{-1}(z) + L_2^{-1}(b_2)$ ($L_2$ is a linear permutation).
+\begin{gather*}
+\hat{G}(u,v) = \sum\limits_{x \in \mathbb{F}_2^n} \chi(u \cdot G(x) + v\cdot x) = \sum\limits_{x \in \mathbb{F}_2^n} \chi(u \cdot (L_1 \circ F(z) + b_1 + L_3(x)+b_3) + v\cdot x) = \\
+\chi(u\cdot(b_1+b_3)) \sum\limits_{z \in \mathbb{F}_2^n} \chi(u \cdot (L_1 \circ F(z) + L_3 \circ L_2^{-1}(z) +L_3 \circ L_2^{-1}(b_2))) + v\cdot (L_2^{-1}(z) +L_2^{-1}(b_2))) =\\
+\end{gather*}
+Denote $c = \chi(u\cdot(b_1+b_3 + L_3\circ L_2^{-1}(b_2)) + v\cdot L_2^{-1}(b_2))$. By definition $c = \pm 1$. So we can ommit it.
+\begin{gather*}
+|\hat{G}(u,v)| = \sum\limits_{z \in \mathbb{F}_2^n} \chi(u \cdot (L_1 \circ F(z) + L_3 \circ L_2^{-1}(z)) + v\cdot L_2^{-1}(z)) =\\
+\sum\limits_{z \in \mathbb{F}_2^n} \chi(u \cdot L_1 \circ F(z) + u\cdot L_3 \circ L_2^{-1}(z) + v\cdot L_2^{-1}(z)) = \\
+\sum\limits_{z \in \mathbb{F}_2^n} \chi(L_1^*(u) \cdot F(z) + (L_3 \circ L_2^{-1})^*(u) \cdot z + (L_2^{-1})^*(v)\cdot z) = \\
+\sum\limits_{z \in \mathbb{F}_2^n} \chi(L_1^*(u) \cdot F(z) + ((L_3 \circ L_2^{-1})^*(u) + (L_2^{-1})^*(v))\cdot z) \implies\\
+|\hat{G}(u,v)| = |\hat{F}(a,b)| \text{ where }\\
+a = L_1^*(u)\\
+b = (L_3 \circ L_2^{-1})^*(u) + (L_2^{-1})^*(v)
+\end{gather*}
+$a,b$ are determined uniquely since $L_i$s (and equivalently $L_i^*$s) are permutations.
+
+\end{document}
+
