@@ -1,0 +1,39 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage{indentfirst} %indentace prvního odstavce
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage[czech]{babel}
+\usepackage{mathdots}
+\usepackage{slashbox}
+\newcommand{\qed}{\hfill\square}
+\begin{document}
+\begin{center}
+\large NMMB331 - HW4
+
+\normalsize Jan Oupický
+\end{center}
+\vspace{1\baselineskip}
+
+\section{}
+\begin{enumerate}
+    \item $\sim_{EA}$ is reflexive since we can take $A=id=B$ (identities) and $C = 0$ (null map).
+    \item If $A,B$ are affine permutations and $C$ is an affine map s.t. $G(x)= A \circ F \circ B (x) + C(x) \iff F \sim_{EA} G$ then we can write $A^{-1}\circ G \circ B^{-1} (x) + A^{-1}\circ C \circ B^{-1} (x) = F(x) \iff G \sim_{EA} F$. Since $A,B$ are affine permutations then their inverses are also affine permutations and also $A^{-1}\circ C \circ B^{-1}$ is affine since $C$ is affine and $A^{-1},B^{-1}$ are affine permutations. This proves symmetry.
+    \item Assume $F \sim_{EA} G$, $G \sim_{EA} H$ and we want to show $F \sim_{EA} H$. By definition we have $G(x)= A_1 \circ F \circ B_1 (x) + C_1(x)$ and $H(x) = A_2 \circ G \circ B_2 (x) + C_2(x)$. $A_2(x) = M(x)+y$ for some $M$ linear permutation and $y$ vector.
+    \begin{gather*}
+    H(x) = A_2 \circ G \circ B_2 (x) + C_2(x) = A_2 (A_1 \circ F \circ B_1 (B_2(x)) + C_1(B_2(x))) + C_2(x) =\\
+    M(A_1 \circ F \circ B_1 (B_2(x)) + C_1(B_2(x))) + y + C_2(x) =\\
+    M(A_1 \circ F \circ B_1 (B_2(x))) + M(C_1(B_2(x))) + y + C_2(x) = \\
+    (M \circ A_1) \circ F \circ (B_1 \circ B_2)(x) + (M \circ C_1 \circ B_2(x) + y + C_2(x))
+    \end{gather*}
+    $M \circ A_1$ is an affine permutation since $M$ is linear permutation and $A_1$ is affine permutation. $B_1 \circ B_2$ is affine permutation since both are affine permutations. $M \circ C_1 \circ B_2$ is affine map since $M, B_2$ are affine permutations and $C_1$ affine map, $C_2(x)+y$ is an affine map. Sum of affine maps is affine map. This proves transitivity.
+\end{enumerate}
+\end{document}
+
