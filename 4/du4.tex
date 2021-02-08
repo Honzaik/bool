@@ -35,5 +35,75 @@
     \end{gather*}
     $M \circ A_1$ is an affine permutation since $M$ is linear permutation and $A_1$ is affine permutation. $B_1 \circ B_2$ is affine permutation since both are affine permutations. $M \circ C_1 \circ B_2$ is affine map since $M, B_2$ are affine permutations and $C_1$ affine map, $C_2(x)+y$ is an affine map. Sum of affine maps is affine map. This proves transitivity.
 \end{enumerate}
+$\qed$
+
+\section{}
+A point $(x,F(x))$ on $\Gamma_F$ corresponds with a point $(F(x),x)$ on $\Gamma_{F^{-1}}$ since $F^{-1}(F(x)) = x$. Therefore our affine permutation should just switch those two "coordinates". 
+
+Using the notation mentioned we can set $A,D = 0$ (zero matrix) and $B,C$ to be identity matrices of dimension $n$. The affine parts $u,v$ are also zero vectors. This map is clearly an affine permutation and as said before it maps $\Gamma_{F^{-1}} = \mathcal{A}(\Gamma_F)$.
+$\qed$
+
+\section{}
+Since $G \sim_{CCZ} F$ we know that for a $x \in \mathbb{F}_2^n$ there exists $y \in \mathbb{F}_2^n$ s.t.:
+\begin{gather*}
+\begin{pmatrix}
+y\\
+G(y)
+\end{pmatrix}
+= \begin{pmatrix}
+A & 0\\
+C & D
+\end{pmatrix}
+\begin{pmatrix}
+x\\
+F(x)
+\end{pmatrix}
++ \begin{pmatrix}
+u\\
+v
+\end{pmatrix}
+\\
+\iff\\
+y = Ax + u\\
+G(y) = Cx + (D \circ F)(x) + v
+\end{gather*}
+Since $\mathcal{A}$ is an affine permutation it must be that the map $M: x \mapsto Ax+u$ is invertible i.e. $x = A^{-1}(y+u) = A^{-1}(y)+A^{-1}(u)$ where $A^{-1}$ is the matrix inverse of $A$. Therefore the inverse map $M^{-1}: y \mapsto A^{-1}y + A^{-1}u$ is also an affine permutation. Now we will just apply it to our equality above.
+\begin{gather*}
+G(y) = Cx + (D \circ F)(x) + v \iff (G \circ M)(x) = Cx + (D \circ F)(x) + v\\
+\text{Apply inverse $M^{-1}$:}\\
+G(x) = (C \circ M^{-1})(x) + (D \circ F \circ M^{-1})(x) + M^{-1}v\\
+G(x) = (D \circ F \circ M^{-1})(x) + ((C \circ M^{-1})(x) + M^{-1}v)
+\end{gather*}
+We know that $M^{-1}$ is an affine permutation . $C$ is a linear map and therefore the composition of $M^{-1}$ and $C$ is also an linear map and together with the constant vector $M^{-1}v$ they form an affine map. 
+
+Now we just need to show that $D$ is an affine permutation to fullfil the $EA$ requirements. Since $\mathcal{A} = \mathcal{L} + (u,v)$ and $\mathcal{A}$ is an affine permutation and $\mathcal{L}$ is linear, it must be that $\mathcal{L}$ is a linear permuation. Since $\mathcal{L}$ can be represented as a matrix and is a permutation that means that every subset of it columns must be linearly independent. Choose the subset of columns containing $D$. They must be linearly independent and this implies that columns of $D$ must be linearly independent since $B = 0$. This means that $D$ is a linear permutation.
+$\qed$
+
+\section{}
+Since $F \sim_{CCZ}G$ where $u,v=0$ we can write that for some $x \in \mathbb{F}_2^n: y = F_1(x)$ and $G(y)=F_2(x)$. We want to show that there exists 1 to 1 correpondence between $(a,b) \in \mathbb{F}_2^n \times \mathbb{F}_2^n $ and some $(a',b') \in \mathbb{F}_2^n \times \mathbb{F}_2^n$ s.t. $\hat{G}(a,b) = \hat{F}(a',b')$.
+\begin{gather*}
+\hat{G}(a,b) = \sum\limits_{y \in \mathbb{F}_2^n} (-1)^{\langle a,G(y) \rangle + \langle b, y \rangle} =  \sum\limits_{x \in \mathbb{F}_2^n} (-1)^{\langle a,F_2(x) \rangle + \langle b, F_1(x) \rangle}\\
+\text{Lets focus on the exponent now:}\\
+\langle a,F_2(x) \rangle + \langle b, F_1(x) \rangle = \langle a,Cx + D(F(x)) \rangle + \langle b, Ax + B(F(x)) \rangle = \\
+\langle a,Cx \rangle + \langle a,D(F(x)) \rangle + \langle b, Ax \rangle  + \langle b,B(F(x)) \rangle =\\
+\text{$A,B,C,D$ are all linear so we will use their adjoint maps:}\\
+= \langle C^*a,x \rangle + \langle D^*a,F(x) \rangle + \langle A^*b, x \rangle  + \langle B^*b,F(x) \rangle = \\
+\langle C^*a + A^*b, x \rangle + \langle D^*a + B^*b, F(x) \rangle \implies\\
+\hat{G}(a,b) = \hat{F}(a',b') \text{ where } a' = C^*a + A^*b, b' = D^*a + B^*b\\
+\text{In matrix notation:}\\
+\begin{pmatrix}
+a'\\
+b'
+\end{pmatrix} =
+\begin{pmatrix}
+A^* & C^*\\
+B^* & D^*
+\end{pmatrix}\begin{pmatrix}
+b\\
+a
+\end{pmatrix} \iff (a',b') = \mathcal{L}^*(b,a)
+\end{gather*}
+Since we know that $\mathcal{L}^*$ is a permutation then we have the 1 to 1 correspondence between $(a,b)$ and $(a',b')$.
+$\qed$
 \end{document}
 
